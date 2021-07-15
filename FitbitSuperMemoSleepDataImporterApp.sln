@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitbitSuperMemoSleepDataImporterApp", "FitbitSuperMemoSleepDataImporterApp\FitbitSuperMemoSleepDataImporterApp.csproj", "{75787BFE-0C35-480A-AAFA-55BE4543708B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitbitSuperMemoSleepDataImporterApp", "FitbitSuperMemoSleepDataImporterApp\FitbitSuperMemoSleepDataImporterApp.csproj", "{3D632D96-DB38-428D-B353-F8C849793B50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleepDataImporter", "..\SuperMemoSleepDataImporter\src\SleepDataImporter\SleepDataImporter.csproj", "{FF9A282D-100E-4DC3-8A8C-C530C114C2C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleepDataImporter", "..\SuperMemoSleepDataImporter\src\SleepDataImporter\SleepDataImporter.csproj", "{92363493-ABA6-4EC8-BA52-968B79966E87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{75787BFE-0C35-480A-AAFA-55BE4543708B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75787BFE-0C35-480A-AAFA-55BE4543708B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75787BFE-0C35-480A-AAFA-55BE4543708B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75787BFE-0C35-480A-AAFA-55BE4543708B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF9A282D-100E-4DC3-8A8C-C530C114C2C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF9A282D-100E-4DC3-8A8C-C530C114C2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF9A282D-100E-4DC3-8A8C-C530C114C2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF9A282D-100E-4DC3-8A8C-C530C114C2C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D632D96-DB38-428D-B353-F8C849793B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D632D96-DB38-428D-B353-F8C849793B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D632D96-DB38-428D-B353-F8C849793B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D632D96-DB38-428D-B353-F8C849793B50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92363493-ABA6-4EC8-BA52-968B79966E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92363493-ABA6-4EC8-BA52-968B79966E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92363493-ABA6-4EC8-BA52-968B79966E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92363493-ABA6-4EC8-BA52-968B79966E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4D9988B8-8C46-45DC-B060-F003D3100C86}
+		SolutionGuid = {BB9780C7-97CC-4048-8713-213B7DB028D7}
 	EndGlobalSection
 EndGlobal
