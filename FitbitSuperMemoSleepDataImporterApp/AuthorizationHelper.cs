@@ -50,6 +50,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
             }
             catch
             {
+                Console.WriteLine("Failed to save token to file");
             }
         }
 
@@ -79,7 +80,14 @@ namespace FitbitSuperMemoSleepDataImporterApp
             Console.WriteLine("Sending authorization request...");
             string scope = string.Join("%20", scopes);
             string authorizeUrl = $"https://www.fitbit.com/oauth2/authorize?response_type=code&client_id={Options.ClientId}&scope={scope}&expires_in=86400";
-            Process.Start(authorizeUrl);
+            try
+            {
+                Process.Start(new ProcessStartInfo(authorizeUrl) { UseShellExecute = true });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} exception caught.", e);
+            }
 
             Console.WriteLine("Waiting for callback at http://localhost");
             string code;
