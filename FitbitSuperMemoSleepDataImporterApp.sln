@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitbitSuperMemoSleepDataImporterApp", "FitbitSuperMemoSleepDataImporterApp\FitbitSuperMemoSleepDataImporterApp.csproj", "{3D632D96-DB38-428D-B353-F8C849793B50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitbitSuperMemoSleepDataImporterApp", "FitbitSuperMemoSleepDataImporterApp\FitbitSuperMemoSleepDataImporterApp.csproj", "{3D632D96-DB38-428D-B353-F8C849793B50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleepDataImporter", "..\SuperMemoSleepDataImporter\src\SleepDataImporter\SleepDataImporter.csproj", "{92363493-ABA6-4EC8-BA52-968B79966E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleepDataImporter", "SuperMemoSleepDataImporter\src\SleepDataImporter\SleepDataImporter.csproj", "{684DE24E-B32B-4D57-964C-25B93BE2C780}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3D632D96-DB38-428D-B353-F8C849793B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D632D96-DB38-428D-B353-F8C849793B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D632D96-DB38-428D-B353-F8C849793B50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92363493-ABA6-4EC8-BA52-968B79966E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92363493-ABA6-4EC8-BA52-968B79966E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92363493-ABA6-4EC8-BA52-968B79966E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92363493-ABA6-4EC8-BA52-968B79966E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{684DE24E-B32B-4D57-964C-25B93BE2C780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684DE24E-B32B-4D57-964C-25B93BE2C780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684DE24E-B32B-4D57-964C-25B93BE2C780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684DE24E-B32B-4D57-964C-25B93BE2C780}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

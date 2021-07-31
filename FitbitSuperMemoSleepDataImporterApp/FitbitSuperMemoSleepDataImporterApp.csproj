@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SuperMemoSleepDataImporter\src\SleepDataImporter\SleepDataImporter.csproj" />
+    <ProjectReference Include="..\SuperMemoSleepDataImporter\src\SleepDataImporter\SleepDataImporter.csproj" />
   </ItemGroup>
 
 </Project>
