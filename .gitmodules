@@ -1,0 +1,3 @@
+[submodule "SuperMemoSleepDataImporter"]
+	path = SuperMemoSleepDataImporter
+	url = https://github.com/bjsi/SuperMemoSleepDataImporter
