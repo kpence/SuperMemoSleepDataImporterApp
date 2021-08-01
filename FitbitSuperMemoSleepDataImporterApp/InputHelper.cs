@@ -69,6 +69,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 }
 
                 userInputString = Console.ReadLine();
+                Console.WriteLine("");
                 var inputString = String.IsNullOrEmpty(userInputString)
                     ? defaultValue
                     : userInputString;
@@ -80,6 +81,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 var s = String.Format("Would you like to save this as default? y/[N]: ");
                 Console.Write(s);
                 var confirmUserInputString = Console.ReadLine().ToLower();
+                Console.WriteLine("");
                 if (String.IsNullOrEmpty(confirmUserInputString) || confirmUserInputString == "n")
                 {
                     break;
