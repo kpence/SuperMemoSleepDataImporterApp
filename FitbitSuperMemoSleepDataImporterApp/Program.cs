@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fitbit.Api.Portable;
-using Fitbit.Models;
 using SleepDataImporter;
 using SleepDataImporter.Models;
 
@@ -13,23 +12,45 @@ namespace FitbitSuperMemoSleepDataImporterApp
         {
             var input = InputHelper.GetInputResponseFromUserPrompts();
 
-            //var file = @"C:\Users\james\SuperMemo\sleep\sleep.tim";
-            //var sleepReg = new SleepDataRegistry(file);
-            //sleepReg.ReadSleepData();
+            if (input.OverwriteBehavior == "Abort")
+            {
+                System.Environment.Exit(0);
+            }
 
             // Authorize with FitBit
             FitbitClient fc = AuthorizationHelper.GetAuthorizedFitBitClient("activity ", "nutrition ", "heartrate ", "location ", "nutrition ", "profile ", "settings ", "sleep ", "social ", "weight");
             //FitbitClient fc = AuthorizationHelper.GetAuthorizedFitBitClient("sleep ");
 
             // Let's get last weeks data
-            DateTime startDate = DateTime.Now - TimeSpan.FromDays(7);
-            DateTime endDate = DateTime.Now;
-            SleepBlock[] sleepBlocks = SleepBlockRepository.fetchSleepBlocksInDateRange(fc, startDate, endDate);
+            var sleepReg = new SleepDataRegistry(input.RegistryPath);
+            DateTime startDate = input.StartDate ?? new DateTime();
+            DateTime endDate = input.EndDate ?? new DateTime();
+
+            SleepBlock[] sleepBlocks = SleepBlockRepository.FetchSleepBlocksInDateRange(fc, startDate, endDate);
+
+            if (input.OverwriteBehavior == "MergePickExisting" || input.OverwriteBehavior == "MergePickNew")
+            {
+                SleepBlock[] existingSleepBlocks = SleepBlockRepository.FetchSleepBlocksFromFile(sleepReg);
+                string overwriteOpt = input.OverwriteBehavior;
+                var overwriteStrategy = (overwriteOpt == "MergePickNew")
+                    ? (SleepBlockMergeStrategy)(new PickNewStrategy())
+                    : new PickExistingStrategy();
+                var merger = new SleepBlockListMerger(overwriteStrategy);
+                sleepBlocks = merger.Merge(existingSleepBlocks, sleepBlocks);
+            }
 
             // Print the results (show it's working!)
             foreach (var block in sleepBlocks)
             {
                 Console.WriteLine(block.ToString());
+            }
+            if (sleepReg.WriteSleepData(new List<SleepBlock>(sleepBlocks))) 
+            {
+                Console.WriteLine("Successfully wrote data to {0}!", input.RegistryPath);
+            }
+            else
+            {
+                Console.WriteLine("Failed to write to file!");
             }
         }
     }

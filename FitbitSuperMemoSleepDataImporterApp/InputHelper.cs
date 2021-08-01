@@ -30,7 +30,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
             startDatePrompt.Prompt = "Enter in the start date.\n" + dateExplanation;
             endDatePrompt.Prompt = "Enter in the end date.\n" + dateExplanation;
             registryPathPrompt.Prompt = "Enter in file path of Sleep Registry file.";
-            overwriteBehaviorPrompt.Prompt = "File already exists. Choose an option:" +
+            overwriteBehaviorPrompt.Prompt = "File already exists. Choose an option:\n" +
                 "\t1 (DeleteExisting) - Delete existing file under path, and create new one.\n" +
                 "\t2 (MergePickExisting) - Merge new data with data in existing file under path, and if any sleep blocks overlap, delete the new sleep block.\n" +
                 "\t3 (MergePickNew) - Merge new data with data in existing file under path, and if any sleep blocks overlap, delete the existing sleep block.\n" +
@@ -78,6 +78,10 @@ namespace FitbitSuperMemoSleepDataImporterApp
             }
             while (true)
             {
+                if (userInputString == "" || userInputString == inputPrompt.DefaultValueConfigKey)
+                {
+                    break;
+                }
                 var s = String.Format("Would you like to save this as default? y/[N]: ");
                 Console.Write(s);
                 var confirmUserInputString = Console.ReadLine().ToLower();
@@ -107,20 +111,20 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 return null;
             }
 
-            Group absoluteDateString = m.Groups[1];
-            Group relativeDateString = m.Groups[4];
-            Group todayDateString = m.Groups[5];
+            Group absoluteDateGroup = m.Groups[1];
+            Group relativeDateGroup = m.Groups[4];
+            Group todayDateGroup = m.Groups[5];
 
-            if (absoluteDateString.Success)
+            if (absoluteDateGroup.Success)
             {
-                return DateTime.Parse(absoluteDateString.Value);
+                return DateTime.Parse(absoluteDateGroup.Value);
             }
-            if (relativeDateString.Success)
+            if (relativeDateGroup.Success)
             {
-                int days = Int32.Parse(relativeDateString.Value);
+                int days = Int32.Parse(relativeDateGroup.Value);
                 return DateTime.Today + TimeSpan.FromDays(days);
             }
-            if (todayDateString.Success)
+            if (todayDateGroup.Success)
             {
                 return DateTime.Today;
             }
