@@ -11,6 +11,8 @@ namespace FitbitSuperMemoSleepDataImporterApp
     {
         static void Main(string[] args)
         {
+            var input = InputHelper.GetInputResponseFromUserPrompts();
+
             //var file = @"C:\Users\james\SuperMemo\sleep\sleep.tim";
             //var sleepReg = new SleepDataRegistry(file);
             //sleepReg.ReadSleepData();
@@ -23,8 +25,6 @@ namespace FitbitSuperMemoSleepDataImporterApp
             DateTime startDate = DateTime.Now - TimeSpan.FromDays(7);
             DateTime endDate = DateTime.Now;
             SleepBlock[] sleepBlocks = SleepBlockRepository.fetchSleepBlocksInDateRange(fc, startDate, endDate);
-
-            //ignore this: System.Xml.Serialization.XmlSerializer src = new System.Xml.Serialization.XmlSerializer(typeof(List<Weight>));
 
             // Print the results (show it's working!)
             foreach (var block in sleepBlocks)
