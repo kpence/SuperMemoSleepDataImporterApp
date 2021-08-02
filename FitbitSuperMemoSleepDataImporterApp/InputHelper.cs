@@ -137,8 +137,14 @@ namespace FitbitSuperMemoSleepDataImporterApp
 
         public static bool IsFilePathValid(string filePath)
         {
+            bool possiblePath = filePath.IndexOfAny(Path.GetInvalidPathChars()) == -1;
+            if (!possiblePath)
+            {
+                return false;
+            }
             var path = Path.GetDirectoryName(filePath);
-            return true;
+            bool pathDirectoryExists = Directory.Exists(path);
+            return pathDirectoryExists;
         }
     }
 }
