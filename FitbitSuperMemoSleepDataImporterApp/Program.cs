@@ -12,9 +12,10 @@ namespace FitbitSuperMemoSleepDataImporterApp
         {
             var input = InputHelper.GetInputResponseFromUserPrompts();
 
+
             if (input.OverwriteBehavior == "Abort")
             {
-                System.Environment.Exit(0);
+                Environment.Exit(0);
             }
 
             // Authorize with FitBit
