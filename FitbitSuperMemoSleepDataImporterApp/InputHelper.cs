@@ -62,10 +62,13 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 }
                 Console.WriteLine(inputPrompt.Prompt);
 
-                if (!String.IsNullOrEmpty(defaultValue))
+                if (String.IsNullOrEmpty(defaultValue))
                 {
-                    var s = String.Format(" [Leave Blank for Default: {0}]: ", defaultValue);
-                    Console.Write(s);
+                    Console.Write(String.Format(" : "));
+                }
+                    else
+                {
+                    Console.Write(String.Format(" [Leave Blank for Default: {0}]: ", defaultValue));
                 }
 
                 userInputString = Console.ReadLine();
