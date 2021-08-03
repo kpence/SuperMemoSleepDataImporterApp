@@ -4,6 +4,13 @@ using SleepDataImporter.Models;
 
 namespace FitbitSuperMemoSleepDataImporterApp
 {
+    public class SleepBlockComp : IComparer<SleepBlock>
+    {
+        public int Compare(SleepBlock x, SleepBlock y)
+        {
+            return x.Start.CompareTo(y.Start);
+        }
+    }
     class SleepBlockListMerger
     {
         private SleepBlockMergeStrategy MergeStrategy { get; set; }
@@ -13,6 +20,9 @@ namespace FitbitSuperMemoSleepDataImporterApp
         }
         public SleepBlock[] Merge(SleepBlock[] existingSleepBlocks, SleepBlock[] newSleepBlocks)
         {
+            var comp = new SleepBlockComp();
+            Array.Sort(existingSleepBlocks, comp);
+            Array.Sort(newSleepBlocks, comp);
             var existingSleepBlockIterator = new SleepBlockIterator(existingSleepBlocks);
             var newSleepBlockIterator = new SleepBlockIterator(newSleepBlocks);
             var sleepBlockList = new List<SleepBlock>(MergeStrategy.GetInitialSleepBlocks(existingSleepBlocks, newSleepBlocks));
