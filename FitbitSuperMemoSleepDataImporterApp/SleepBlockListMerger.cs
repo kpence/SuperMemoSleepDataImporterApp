@@ -27,7 +27,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
 
             while (existingSleepBlockIterator.HasNext() && newSleepBlockIterator.HasNext())
             {
-                if (EarlierThan(newSleepBlockIterator.Get(), existingSleepBlockIterator.Get()))
+                if (newSleepBlockIterator.EarlierThan(existingSleepBlockIterator))
                 {
                     if (!IsOverlap(existingSleepBlockIterator.Get(), newSleepBlockIterator.Get()))
                     {
@@ -44,14 +44,15 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 sleepBlockList.Add(newSleepBlockIterator.Next());
             }
             return sleepBlockList.ToArray();
-        } 
-        private static bool EarlierThan(SleepBlock sleepBlock1, SleepBlock sleepBlock2)
+        }
+        private static bool IsDateTimeWithinSleepBlock(DateTime dt, SleepBlock sleepBlock)
         {
-            return sleepBlock1.Start < sleepBlock2.Start;
+            return dt >= sleepBlock.Start && dt <= sleepBlock.End;
         }
         private static bool IsOverlap(SleepBlock sleepBlock1, SleepBlock sleepBlock2)
         {
-            return !(sleepBlock1.Start > sleepBlock2.End || sleepBlock2.Start > sleepBlock1.End);
+            return IsDateTimeWithinSleepBlock(sleepBlock1.Start, sleepBlock2)
+                || IsDateTimeWithinSleepBlock(sleepBlock2.Start, sleepBlock1);
         }
     }
     public class SleepBlockIterator
@@ -60,8 +61,8 @@ namespace FitbitSuperMemoSleepDataImporterApp
         private SleepBlock[] SleepBlocks { get; set; }
         public SleepBlockIterator(SleepBlock[] sleepBlocks)
         {
-            this.SleepBlocks = sleepBlocks;
-            this.CurrentBlockIndex = 0;
+            SleepBlocks = sleepBlocks;
+            CurrentBlockIndex = 0;
         }
         public bool HasNext()
         {
@@ -76,6 +77,10 @@ namespace FitbitSuperMemoSleepDataImporterApp
             var ret = Get();
             this.CurrentBlockIndex += 1;
             return ret;
+        }
+        public bool EarlierThan(SleepBlockIterator other)
+        {
+            return Get().Start < other.Get().Start;
         }
     }
 }
