@@ -60,6 +60,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 {
                     return inputPrompt.MapValueFromString(defaultValue);
                 }
+                Console.WriteLine();
                 Console.WriteLine(inputPrompt.Prompt);
 
                 if (String.IsNullOrEmpty(defaultValue))

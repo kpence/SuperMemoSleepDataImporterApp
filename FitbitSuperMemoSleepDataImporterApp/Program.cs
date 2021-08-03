@@ -47,11 +47,11 @@ namespace FitbitSuperMemoSleepDataImporterApp
             }
             if (sleepReg.WriteSleepData(new List<SleepBlock>(sleepBlocks))) 
             {
-                Console.WriteLine("Successfully wrote data to {0}!", input.RegistryPath);
+                Console.WriteLine("\nSuccessfully wrote data to {0}!", input.RegistryPath);
             }
             else
             {
-                Console.WriteLine("Failed to write to file!");
+                Console.WriteLine("\nFailed to write to file!");
             }
         }
     }
