@@ -28,7 +28,8 @@ namespace FitbitSuperMemoSleepDataImporterApp
             if (token == null || token.UtcExpirationDate < DateTime.Now.ToUniversalTime())
             {
                 // we need admin to retrieve the token automatically
-                RestartAsElevatedIfNeeded();
+                //RestartAsElevatedIfNeeded();
+                RequireAdmin();
 
                 token = await AuthorizeToFitBitAsync(scopes.Length == 0 ? Options.AllScopes : scopes);
 
@@ -131,18 +132,12 @@ namespace FitbitSuperMemoSleepDataImporterApp
             return null;
         }
 
-        private static void RestartAsElevatedIfNeeded()
+        private static void RequireAdmin()
         {
             // we can't authorize if we are not admin because we require access to register a listener to http://localhost.
             if (!WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid))
             {
-                // start the same process (as admin) 
-                Process elevatedProcess = new Process();
-                elevatedProcess.StartInfo.FileName = System.Reflection.Assembly.GetEntryAssembly().Location;
-                elevatedProcess.StartInfo.Arguments = string.Join(" ", Environment.GetCommandLineArgs()); // pass whatever arguments were passed before.
-                elevatedProcess.StartInfo.Verb = "runas"; //run as admin
-                elevatedProcess.Start();
-
+                Console.WriteLine("\nYour token is either expired or missing. Please restart the program as administrator.");
                 Environment.Exit(0);
             }
         }

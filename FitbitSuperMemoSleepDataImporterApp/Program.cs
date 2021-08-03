@@ -10,6 +10,10 @@ namespace FitbitSuperMemoSleepDataImporterApp
     {
         static void Main(string[] args)
         {
+            // Authorize with FitBit
+            FitbitClient fc = AuthorizationHelper.GetAuthorizedFitBitClient("activity ", "nutrition ", "heartrate ", "location ", "nutrition ", "profile ", "settings ", "sleep ", "social ", "weight");
+            //FitbitClient fc = AuthorizationHelper.GetAuthorizedFitBitClient("sleep ");
+
             var input = InputHelper.GetInputResponseFromUserPrompts();
 
 
@@ -17,10 +21,6 @@ namespace FitbitSuperMemoSleepDataImporterApp
             {
                 Environment.Exit(0);
             }
-
-            // Authorize with FitBit
-            FitbitClient fc = AuthorizationHelper.GetAuthorizedFitBitClient("activity ", "nutrition ", "heartrate ", "location ", "nutrition ", "profile ", "settings ", "sleep ", "social ", "weight");
-            //FitbitClient fc = AuthorizationHelper.GetAuthorizedFitBitClient("sleep ");
 
             // Let's get last weeks data
             var sleepReg = new SleepDataRegistry(input.RegistryPath);
