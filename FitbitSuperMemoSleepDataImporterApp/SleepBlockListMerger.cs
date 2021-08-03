@@ -44,8 +44,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
         }
         private bool IsOverlap(SleepBlock sleepBlock1, SleepBlock sleepBlock2)
         {
-            // TODO
-            return false;
+            return !(sleepBlock1.Start > sleepBlock2.End || sleepBlock2.Start > sleepBlock1.End);
         }
     }
     public class PickNewStrategy : SleepBlockMergeStrategy
