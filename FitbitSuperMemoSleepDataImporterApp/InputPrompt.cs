@@ -67,10 +67,10 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 case "2":
                 case "MergePickExisting":
                     return "MergePickExisting";
-                case "3":
+                /*case "3":
                 case "MergePickNew":
-                    return "MergePickNew";
-                case "4":
+                    return "MergePickNew";*/
+                case "3":
                 case "Abort":
                     return "Abort";
             }

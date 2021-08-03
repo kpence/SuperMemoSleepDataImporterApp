@@ -33,8 +33,8 @@ namespace FitbitSuperMemoSleepDataImporterApp
             overwriteBehaviorPrompt.Prompt = "File already exists. Choose an option:\n" +
                 "\t1 (DeleteExisting) - Delete existing file under path, and create new one.\n" +
                 "\t2 (MergePickExisting) - Merge new data with data in existing file under path, and if any sleep blocks overlap, delete the new sleep block.\n" +
-                "\t3 (MergePickNew) - Merge new data with data in existing file under path, and if any sleep blocks overlap, delete the existing sleep block.\n" +
-                "\t4 (Abort) - Abort. Do not overwrite.\n" +
+                //"\t3 (MergePickNew) - Merge new data with data in existing file under path, and if any sleep blocks overlap, delete the existing sleep block.\n" +
+                "\t3 (Abort) - Abort. Do not overwrite.\n" +
                 "Enter in number (or label) of option.";
 
             var response = new InputResponse();

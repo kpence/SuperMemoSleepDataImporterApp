@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Fitbit.Api.Portable;
 using SleepDataImporter;
@@ -23,21 +24,22 @@ namespace FitbitSuperMemoSleepDataImporterApp
             }
 
             // Let's get last weeks data
-            var sleepReg = new SleepDataRegistry(input.RegistryPath);
             DateTime startDate = input.StartDate ?? new DateTime();
             DateTime endDate = input.EndDate ?? new DateTime();
 
             SleepBlock[] sleepBlocks = SleepBlockRepository.FetchSleepBlocksInDateRange(fc, startDate, endDate);
 
-            if (input.OverwriteBehavior == "MergePickExisting" || input.OverwriteBehavior == "MergePickNew")
+            if (input.OverwriteBehavior == "DeleteExisting")
+            {
+                File.Delete(input.RegistryPath);
+            }
+
+            var sleepReg = new SleepDataRegistry(input.RegistryPath);
+
+            if (input.OverwriteBehavior == "MergePickExisting")
             {
                 SleepBlock[] existingSleepBlocks = SleepBlockRepository.FetchSleepBlocksFromFile(sleepReg);
-                string overwriteOpt = input.OverwriteBehavior;
-                var overwriteStrategy = (overwriteOpt == "MergePickNew")
-                    ? (SleepBlockMergeStrategy)(new PickNewStrategy())
-                    : new PickExistingStrategy();
-                var merger = new SleepBlockListMerger(overwriteStrategy);
-                sleepBlocks = merger.Merge(existingSleepBlocks, sleepBlocks);
+                sleepBlocks = SleepBlockListMerger.SubtractExistingFromList(sleepBlocks, existingSleepBlocks);
             }
 
             // Print the results (show it's working!)
@@ -47,7 +49,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
             }
             if (sleepReg.WriteSleepData(new List<SleepBlock>(sleepBlocks))) 
             {
-                Console.WriteLine("\nSuccessfully wrote data to {0}!", input.RegistryPath);
+                Console.WriteLine("\nSuccessfully wrote new sleep data to {0}!", input.RegistryPath);
             }
             else
             {

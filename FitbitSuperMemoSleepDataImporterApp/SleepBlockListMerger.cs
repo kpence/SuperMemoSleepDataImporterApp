@@ -6,6 +6,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
 {
     public class SleepBlockComp : IComparer<SleepBlock>
     {
+        // Compares by Height, Length, and Width.
         public int Compare(SleepBlock x, SleepBlock y)
         {
             return x.Start.CompareTo(y.Start);
@@ -13,76 +14,45 @@ namespace FitbitSuperMemoSleepDataImporterApp
     }
     class SleepBlockListMerger
     {
-        private SleepBlockMergeStrategy MergeStrategy { get; set; }
-        public SleepBlockListMerger(SleepBlockMergeStrategy mergeStrategy)
-        {
-            this.MergeStrategy = mergeStrategy;
-        }
-        public SleepBlock[] Merge(SleepBlock[] existingSleepBlocks, SleepBlock[] newSleepBlocks)
+        public static SleepBlock[] SubtractExistingFromList(SleepBlock[] newSleepBlocks, SleepBlock[] existingSleepBlocks)
         {
             var comp = new SleepBlockComp();
             Array.Sort(existingSleepBlocks, comp);
             Array.Sort(newSleepBlocks, comp);
+
             var existingSleepBlockIterator = new SleepBlockIterator(existingSleepBlocks);
             var newSleepBlockIterator = new SleepBlockIterator(newSleepBlocks);
-            var sleepBlockList = new List<SleepBlock>(MergeStrategy.GetInitialSleepBlocks(existingSleepBlocks, newSleepBlocks));
-            var existingSleepBlock = existingSleepBlockIterator.Get();
-            var newSleepBlock = newSleepBlockIterator.Get();
-            while (existingSleepBlockIterator.hasNext() && newSleepBlockIterator.hasNext())
+
+            var sleepBlockList = new List<SleepBlock>();
+
+            while (existingSleepBlockIterator.HasNext() && newSleepBlockIterator.HasNext())
             {
-                if (IsOverlap(existingSleepBlock, newSleepBlock))
+                if (EarlierThan(newSleepBlockIterator.Get(), existingSleepBlockIterator.Get()))
                 {
-                    var pickedSleepBlock = MergeStrategy.PickSleepBlock(existingSleepBlock, newSleepBlock);
-                    if (pickedSleepBlock != null)
+                    if (!IsOverlap(existingSleepBlockIterator.Get(), newSleepBlockIterator.Get()))
                     {
-                        sleepBlockList.Add(pickedSleepBlock);
+                        sleepBlockList.Add(newSleepBlockIterator.Get());
                     }
-                }
-                if (EarlierThan(newSleepBlock, existingSleepBlock))
-                {
-                    newSleepBlock = newSleepBlockIterator.Next();
+                    newSleepBlockIterator.Next();
                 } else
                 {
-                    existingSleepBlock = existingSleepBlockIterator.Next();
+                    existingSleepBlockIterator.Next();
                 }
+            }
+            while (newSleepBlockIterator.HasNext())
+            {
+                sleepBlockList.Add(newSleepBlockIterator.Next());
             }
             return sleepBlockList.ToArray();
         } 
-        private bool EarlierThan(SleepBlock sleepBlock1, SleepBlock sleepBlock2)
+        private static bool EarlierThan(SleepBlock sleepBlock1, SleepBlock sleepBlock2)
         {
             return sleepBlock1.Start < sleepBlock2.Start;
         }
-        private bool IsOverlap(SleepBlock sleepBlock1, SleepBlock sleepBlock2)
+        private static bool IsOverlap(SleepBlock sleepBlock1, SleepBlock sleepBlock2)
         {
             return !(sleepBlock1.Start > sleepBlock2.End || sleepBlock2.Start > sleepBlock1.End);
         }
-    }
-    public class PickNewStrategy : SleepBlockMergeStrategy
-    {
-        public SleepBlock? PickSleepBlock(SleepBlock existingSleepBlock, SleepBlock newSleepBlock)
-        {
-            return newSleepBlock;
-        }
-        public SleepBlock[] GetInitialSleepBlocks(SleepBlock[] existingSleepBlocks, SleepBlock[] newSleepBlocks)
-        {
-            return newSleepBlocks;
-        }
-    }
-    public class PickExistingStrategy : SleepBlockMergeStrategy
-    {
-        public SleepBlock? PickSleepBlock(SleepBlock existingSleepBlock, SleepBlock newSleepBlock)
-        {
-            return existingSleepBlock;
-        }
-        public SleepBlock[] GetInitialSleepBlocks(SleepBlock[] existingSleepBlocks, SleepBlock[] newSleepBlocks)
-        {
-            return existingSleepBlocks;
-        }
-    }
-    interface SleepBlockMergeStrategy
-    {
-        public SleepBlock? PickSleepBlock(SleepBlock existingSleepBlock, SleepBlock newSleepBlock);
-        public SleepBlock[] GetInitialSleepBlocks(SleepBlock[] existingSleepBlocks, SleepBlock[] newSleepBlocks);
     }
     public class SleepBlockIterator
     {
@@ -93,7 +63,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
             this.SleepBlocks = sleepBlocks;
             this.CurrentBlockIndex = 0;
         }
-        public bool hasNext()
+        public bool HasNext()
         {
             return (CurrentBlockIndex < SleepBlocks.Length);
         }
