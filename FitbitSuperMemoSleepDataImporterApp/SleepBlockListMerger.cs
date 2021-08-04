@@ -27,16 +27,21 @@ namespace FitbitSuperMemoSleepDataImporterApp
 
             while (existingSleepBlockIterator.HasNext() && newSleepBlockIterator.HasNext())
             {
-                if (newSleepBlockIterator.EarlierThan(existingSleepBlockIterator))
+                if (!IsOverlap(newSleepBlockIterator.Get(), existingSleepBlockIterator.Get()))
                 {
-                    if (!IsOverlap(existingSleepBlockIterator.Get(), newSleepBlockIterator.Get()))
+                    if (newSleepBlockIterator.Get().Start > existingSleepBlockIterator.Get().End)
+                    {
+                        existingSleepBlockIterator.Next();
+                    }
+                    else
                     {
                         sleepBlockList.Add(newSleepBlockIterator.Get());
+                        newSleepBlockIterator.Next();
                     }
-                    newSleepBlockIterator.Next();
-                } else
+                }
+                else
                 {
-                    existingSleepBlockIterator.Next();
+                    newSleepBlockIterator.Next();
                 }
             }
             while (newSleepBlockIterator.HasNext())
@@ -57,7 +62,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
     }
     public class SleepBlockIterator
     {
-        private int CurrentBlockIndex { get; set; }
+        public int CurrentBlockIndex { get; set; }
         private SleepBlock[] SleepBlocks { get; set; }
         public SleepBlockIterator(SleepBlock[] sleepBlocks)
         {
