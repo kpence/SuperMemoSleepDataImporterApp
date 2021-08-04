@@ -6,7 +6,6 @@ namespace FitbitSuperMemoSleepDataImporterApp
 {
     public class SleepBlockComp : IComparer<SleepBlock>
     {
-        // Compares by Height, Length, and Width.
         public int Compare(SleepBlock x, SleepBlock y)
         {
             return x.Start.CompareTo(y.Start);
