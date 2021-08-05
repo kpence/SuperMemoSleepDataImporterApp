@@ -27,7 +27,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
             DateTime startDate = input.StartDate ?? new DateTime();
             DateTime endDate = input.EndDate ?? new DateTime();
 
-            SleepBlock[] sleepBlocks = SleepBlockRepository.FetchSleepBlocksInDateRange(fc, startDate, endDate);
+            var sleepBlocks = SleepBlockRepository.FetchSleepBlocksInDateRange(fc, startDate, endDate);
 
             if (input.OverwriteBehavior == "DeleteExisting")
             {
@@ -38,7 +38,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
 
             if (input.OverwriteBehavior == "MergePickExisting")
             {
-                SleepBlock[] existingSleepBlocks = SleepBlockRepository.FetchSleepBlocksFromFile(sleepReg);
+                var existingSleepBlocks = SleepBlockRepository.FetchSleepBlocksFromFile(sleepReg);
                 sleepBlocks = SleepBlockListMerger.SubtractExistingFromList(sleepBlocks, existingSleepBlocks);
             }
 
@@ -47,7 +47,8 @@ namespace FitbitSuperMemoSleepDataImporterApp
             {
                 Console.WriteLine(block.ToString());
             }
-            if (sleepReg.WriteSleepData(new List<SleepBlock>(sleepBlocks))) 
+            var libSleepBlocks = SleepBlockAdapter.ToSleepBlocks(new List<ISleepBlockAdapter>(sleepBlocks));
+            if (sleepReg.WriteSleepData(libSleepBlocks))
             {
                 Console.WriteLine("\nSuccessfully wrote new sleep data to {0}!", input.RegistryPath);
             }
