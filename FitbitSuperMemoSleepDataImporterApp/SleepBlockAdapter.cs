@@ -12,6 +12,8 @@ namespace FitbitSuperMemoSleepDataImporterApp
         public bool NaturalWake { get; set; }
         public bool NaturalToBed { get; set; }
         public SleepBlock ToSleepBlock();
+        public bool IsOverlap(ISleepBlockAdapter other);
+        public bool IsDateTimeWithinSleepBlock(DateTime dt);
     }
     public class SleepBlockAdapter : ISleepBlockAdapter
     {
@@ -39,6 +41,19 @@ namespace FitbitSuperMemoSleepDataImporterApp
         public override string ToString()
         {
             return $"Start = {Start}; End = {End};";
+        }
+        public static bool IsOverlap(ISleepBlockAdapter sleepBlock1, ISleepBlockAdapter sleepBlock2)
+        {
+            return sleepBlock1.IsOverlap(sleepBlock2);
+        }
+        public bool IsOverlap(ISleepBlockAdapter other)
+        {
+            return IsDateTimeWithinSleepBlock(other.Start)
+                || other.IsDateTimeWithinSleepBlock(Start);
+        }
+        public bool IsDateTimeWithinSleepBlock(DateTime dt)
+        {
+            return dt >= Start && dt <= End;
         }
     }
 }

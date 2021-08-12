@@ -10,7 +10,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
             return x.Start.CompareTo(y.Start);
         }
     }
-    class SleepBlockListMerger
+    public class SleepBlockListMerger
     {
         public static ISleepBlockAdapter[] SubtractExistingFromList(
             ISleepBlockAdapter[] newSleepBlocks,
@@ -27,7 +27,7 @@ namespace FitbitSuperMemoSleepDataImporterApp
 
             while (existingSleepBlockIterator.HasNext() && newSleepBlockIterator.HasNext())
             {
-                if (!IsOverlap(newSleepBlockIterator.Get(), existingSleepBlockIterator.Get()))
+                if (!SleepBlockAdapter.IsOverlap(newSleepBlockIterator.Get(), existingSleepBlockIterator.Get()))
                 {
                     if (newSleepBlockIterator.Get().Start > existingSleepBlockIterator.Get().End)
                     {
@@ -49,15 +49,6 @@ namespace FitbitSuperMemoSleepDataImporterApp
                 sleepBlockList.Add(newSleepBlockIterator.Next());
             }
             return sleepBlockList.ToArray();
-        }
-        private static bool IsDateTimeWithinSleepBlock(DateTime dt, ISleepBlockAdapter sleepBlock)
-        {
-            return dt >= sleepBlock.Start && dt <= sleepBlock.End;
-        }
-        private static bool IsOverlap(ISleepBlockAdapter sleepBlock1, ISleepBlockAdapter sleepBlock2)
-        {
-            return IsDateTimeWithinSleepBlock(sleepBlock1.Start, sleepBlock2)
-                || IsDateTimeWithinSleepBlock(sleepBlock2.Start, sleepBlock1);
         }
     }
     public class SleepBlockIterator
@@ -82,10 +73,6 @@ namespace FitbitSuperMemoSleepDataImporterApp
             var ret = Get();
             this.CurrentBlockIndex += 1;
             return ret;
-        }
-        public bool EarlierThan(SleepBlockIterator other)
-        {
-            return Get().Start < other.Get().Start;
         }
     }
 }
