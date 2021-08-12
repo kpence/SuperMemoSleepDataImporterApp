@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using Fitbit.Api.Portable;
 using SleepDataImporter;
-using SleepDataImporter.Models;
 
 namespace FitbitSuperMemoSleepDataImporterApp
 {
