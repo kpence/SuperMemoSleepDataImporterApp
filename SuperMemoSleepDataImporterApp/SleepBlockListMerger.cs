@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FitbitSuperMemoSleepDataImporterApp
+namespace SuperMemoSleepDataImporterApp
 {
     public class SleepBlockComp : IComparer<ISleepBlockAdapter>
     {

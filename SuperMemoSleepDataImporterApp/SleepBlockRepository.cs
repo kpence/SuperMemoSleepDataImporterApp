@@ -5,7 +5,7 @@ using Fitbit.Api.Portable;
 using Fitbit.Api.Portable.Models;
 using SleepDataImporter;
 
-namespace FitbitSuperMemoSleepDataImporterApp
+namespace SuperMemoSleepDataImporterApp
 {
     class SleepBlockRepository
     {

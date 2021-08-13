@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FitbitSuperMemoSleepDataImporterApp
+namespace SuperMemoSleepDataImporterApp
 {
     public class InputResponse
     {

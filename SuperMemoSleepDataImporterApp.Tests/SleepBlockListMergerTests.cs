@@ -2,7 +2,7 @@ using Xunit;
 using System;
 using System.Collections.Generic;
 
-namespace FitbitSuperMemoSleepDataImporterApp.Tests
+namespace SuperMemoSleepDataImporterApp.Tests
 {
     public class SleepBlockListMergerTests
     {

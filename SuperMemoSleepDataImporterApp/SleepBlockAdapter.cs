@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using SleepDataImporter.Models;
 
-namespace FitbitSuperMemoSleepDataImporterApp
+namespace SuperMemoSleepDataImporterApp
 {
     public interface ISleepBlockAdapter
     {

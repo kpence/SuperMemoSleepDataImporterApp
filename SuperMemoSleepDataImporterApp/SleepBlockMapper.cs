@@ -2,7 +2,7 @@
 using Fitbit.Api.Portable.Models;
 using SleepDataImporter.Models;
 
-namespace FitbitSuperMemoSleepDataImporterApp
+namespace SuperMemoSleepDataImporterApp
 {
     class SleepBlockMapper
     {

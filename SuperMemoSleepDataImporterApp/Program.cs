@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Fitbit.Api.Portable;
 using SleepDataImporter;
 
-namespace FitbitSuperMemoSleepDataImporterApp
+namespace SuperMemoSleepDataImporterApp
 {
 	public class Program
     {
