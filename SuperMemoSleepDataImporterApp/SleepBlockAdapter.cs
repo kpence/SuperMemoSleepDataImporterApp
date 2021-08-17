@@ -26,12 +26,14 @@ namespace SuperMemoSleepDataImporterApp
             return new SleepBlockAdapter
             {
                 Start = sleepBlock.Start,
-                End = sleepBlock.End
+                End = sleepBlock.End,
+                NaturalWake = sleepBlock.NaturalWake,
+                NaturalToBed = sleepBlock.NaturalToBed
             };
         }
         public SleepBlock ToSleepBlock()
         {
-            return new SleepBlock(Start, End);
+            return new SleepBlock(Start, End, NaturalWake, NaturalToBed);
         }
         public static List<SleepBlock> ToSleepBlocks(List<ISleepBlockAdapter> sleepBlocks)
         {
