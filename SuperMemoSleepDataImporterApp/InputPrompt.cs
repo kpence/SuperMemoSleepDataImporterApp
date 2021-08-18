@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SuperMemoSleepDataImporterApp
 {
@@ -63,16 +61,13 @@ namespace SuperMemoSleepDataImporterApp
             {
                 case "1":
                 case "DeleteExisting":
-                    return "DeleteExisting";
+                    return "1";
                 case "2":
                 case "MergePickExisting":
-                    return "MergePickExisting";
-                /*case "3":
-                case "MergePickNew":
-                    return "MergePickNew";*/
+                    return "2";
                 case "3":
                 case "Abort":
-                    return "Abort";
+                    return "3";
             }
             return null;
         }
